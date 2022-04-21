@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magebit_faq_questions" engine="innodb" comment="Frequently asked questions table">
+        <column name="id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="ID of the question"/>
+        <column name="question" xsi:type="text" nullable="false"/>
+        <column name="answer" xsi:type="text" nullable="false"/>
+        <column name="status" xsi:type="boolean" nullable="false" default="false"/>
+        <column name="position" xsi:type="int" default="0" nullable="false"/>
+        <column name="updated_at" xsi:type="datetime" nullable="false" on_update="true" default="CURRENT_TIMESTAMP"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

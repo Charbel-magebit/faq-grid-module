@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                magebit_faq_question_listing.magebit_faq_question_listing_data_source
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <deps>
+            <dep>magebit_faq_question_listing.magebit_faq_question_listing_data_source</dep>
+        </deps>
+        <spinner>magebit_faq_question_columns</spinner>
+    </settings>
+    <dataSource name="magebit_faq_question_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider name="magebit_faq_question_listing_data_source"
+                      class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <paging name="listing_paging"/>
+        <columnsControls name="columns_controls"/>
+    </listingToolbar>
+    <columns name="magebit_faq_question_columns">
+        <column name="id">
+            <settings>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="question">
+            <settings>
+                <label translate="true">Question</label>
+            </settings>
+        </column>
+        <column name="answer">
+            <settings>
+                <label translate="true">Answer</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">Disabled</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Enabled</item>
+                    </option>
+                </options>
+            </settings>
+        </column>
+        <column name="position">
+            <settings>
+                <label translate="true">Position</label>
+            </settings>
+        </column>
+        <column name="updated_at" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Last Modified</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Magebit\Faq\Ui\Component\Listing\Column\QuestionActions">
+            <settings>
+                <label translate="true">Actions</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
