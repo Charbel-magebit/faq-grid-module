@@ -10,6 +10,9 @@
         },
         "constraint": {
             "PRIMARY": true
+        },
+        "index": {
+            "MAGEBIT_FAQ_QUESTIONS_QUESTION": true
         }
     }
 }
