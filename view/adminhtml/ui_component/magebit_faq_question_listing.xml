@@ -11,7 +11,7 @@
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
                 <item name="label" xsi:type="string" translate="true">Add New Question</item>
-                <item name="url" xsi:type="string">faq/question/add</item>
+                <item name="url" xsi:type="string">*/*/new</item>
                 <item name="class" xsi:type="string">primary</item>
             </item>
         </item>
@@ -43,8 +43,62 @@
         <columnsControls name="columns_controls"/>
         <bookmark name="bookmarks"/>
         <filterSearch name="fulltext"/>
+        <massaction name="listing_massaction">
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <url path="faq/question/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                    <confirm>
+                        <message translate="true">Are you sure to delete selected question?</message>
+                        <title translate="true">Delete Question</title>
+                    </confirm>
+                </settings>
+            </action>
+        </massaction>
     </listingToolbar>
     <columns name="magebit_faq_question_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="faq/question/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
         <column name="id">
             <settings>
                 <label translate="true">ID</label>
@@ -55,6 +109,9 @@
                 <filter>text</filter>
                 <dataType>text</dataType>
                 <label translate="true">Question</label>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
             </settings>
         </column>
         <column name="answer">
@@ -62,6 +119,9 @@
                 <label translate="true">Answer</label>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
             </settings>
         </column>
         <column name="status" component="Magento_Ui/js/grid/columns/select">
@@ -70,6 +130,9 @@
                 <label translate="true">Status</label>
                 <filter>select</filter>
                 <sorting>desc</sorting>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
                 <options>
                     <option name="0" xsi:type="array">
                         <item name="value" xsi:type="number">0</item>
@@ -85,6 +148,9 @@
         <column name="position">
             <settings>
                 <label translate="true">Position</label>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
             </settings>
         </column>
         <column name="updated_at" component="Magento_Ui/js/grid/columns/date">

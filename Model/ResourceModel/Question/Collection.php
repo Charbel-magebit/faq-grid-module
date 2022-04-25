@@ -8,6 +8,8 @@ use Magebit\Faq\Model\ResourceModel\Question as QuestionResourceModel;
 
 class Collection extends AbstractCollection
 {
+    protected $_idFieldName = 'id';
+
     protected function _construct()
     {
         $this->_init(
