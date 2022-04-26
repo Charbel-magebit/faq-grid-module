@@ -6,7 +6,6 @@ use Magebit\Faq\Model\Question;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\View\Element\Template;
-use Magebit\Faq\Model\ResourceModel\Question\Collection as QuestionCollection;
 use Magento\Framework\View\Element\Template\Context;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 
