@@ -17,7 +17,14 @@ class Save extends Action implements HttpPostActionInterface
     /** @var PageFactory $pageFactory */
     protected $pageFactory;
 
+    /**
+     * @var QuestionFactory
+     */
     private $questionFactory;
+
+    /**
+     * @var QuestionRepositoryInterface
+     */
     private $questionRepository;
 
     public function __construct(
@@ -61,6 +68,10 @@ class Save extends Action implements HttpPostActionInterface
         return $resultRedirect->setPath('*/*/');
     }
 
+    /**
+     * @param $params
+     * @return array
+     */
     private function filterParams($params): array
     {
         $filteredParam = [];

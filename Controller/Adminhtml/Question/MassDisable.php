@@ -18,10 +18,20 @@ use Magebit\Faq\Api\QuestionManagementInterface;
 
 class MassDisable extends Action implements HttpPostActionInterface
 {
+    /**
+     * @var Filter
+     */
     protected $filter;
 
 
+    /**
+     * @var QuestionCollectionFactory
+     */
     private $questionCollectionFactory;
+
+    /**
+     * @var QuestionManagementInterface
+     */
     protected $questionManagement;
 
     public function __construct(

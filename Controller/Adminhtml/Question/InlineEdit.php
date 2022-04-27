@@ -17,6 +17,9 @@ use Magento\Framework\Controller\Result\JsonFactory;
 class InlineEdit extends BaseController implements HttpPostActionInterface
 {
 
+    /**
+     * @var JsonFactory
+     */
     private $resultJsonFactory;
 
     public function __construct(
