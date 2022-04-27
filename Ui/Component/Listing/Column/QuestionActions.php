@@ -29,11 +29,11 @@ class QuestionActions extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 $item[$this->getData('name')] = [
                     'enable' => [
-                        'href' => $this->urlBuilder->getUrl('faq/question/enable'),
+                        'href' => $this->urlBuilder->getUrl('faq/question/enable', ['id' => $item['id']]),
                         'label' => __('Enable')
                     ],
                     'disable' => [
-                        'href' => $this->urlBuilder->getUrl('faq/question/disable'),
+                        'href' => $this->urlBuilder->getUrl('faq/question/disable', ['id' => $item['id']]),
                         'label' => __('Disable')
                     ],
                     'delete' => [

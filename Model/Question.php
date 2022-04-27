@@ -21,8 +21,7 @@ class Question extends AbstractModel implements QuestionInterface
 
     public function setQuestion(string $question): self
     {
-        $questionField = self::QUESTION;
-        $this->$questionField = $question;
+        $this->setData(self::QUESTION, $question);
         return $this;
     }
 
@@ -33,8 +32,7 @@ class Question extends AbstractModel implements QuestionInterface
 
     public function setAnswer(string $answer): self
     {
-        $answerField = self::ANSWER;
-        $this->$answerField = $answer;
+        $this->setData(self::ANSWER, $answer);
         return $this;
     }
 
@@ -45,8 +43,7 @@ class Question extends AbstractModel implements QuestionInterface
 
     public function setStatus(bool $status): self
     {
-        $statusField = self::STATUS;
-        $this->$statusField = $status;
+        $this->setData(self::STATUS, $status);
         return $this;
     }
 
@@ -57,8 +54,7 @@ class Question extends AbstractModel implements QuestionInterface
 
     public function setPosition(int $position): self
     {
-        $positionField = self::POSITION;
-        $this->$positionField = $position;
+        $this->setData(self::POSITION, $position);
         return $this;
     }
 

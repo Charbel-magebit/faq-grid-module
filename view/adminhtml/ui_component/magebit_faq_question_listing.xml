@@ -44,6 +44,30 @@
         <bookmark name="bookmarks"/>
         <filterSearch name="fulltext"/>
         <massaction name="listing_massaction">
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <url path="faq/question/massEnable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isAjax" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <url path="faq/question/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
             <action name="edit">
                 <settings>
                     <callback>
