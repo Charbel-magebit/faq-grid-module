@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\Faq\Model\Question;
 
 use Magento\Ui\DataProvider\AbstractDataProvider;
@@ -22,12 +24,7 @@ class DataProvider extends AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
-    /**
-     * Get data
-     *
-     * @return array
-     */
-    public function getData()
+    public function getData(): ?array
     {
         if (isset($this->_loadedData)) {
             return $this->_loadedData;

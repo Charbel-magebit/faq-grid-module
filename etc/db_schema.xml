@@ -2,7 +2,8 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="magebit_faq_questions" engine="innodb" comment="Frequently asked questions table">
-        <column name="id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="ID of the question"/>
+        <column name="id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="ID of the question"/>
         <column name="question" xsi:type="text" nullable="false"/>
         <column name="answer" xsi:type="text" nullable="false"/>
         <column name="status" xsi:type="boolean" nullable="false" default="false"/>

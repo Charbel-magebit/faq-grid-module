@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -27,8 +29,7 @@ class MassDisable extends Action implements HttpPostActionInterface
         Filter $filter,
         QuestionManagementInterface $questionManagement,
         QuestionCollectionFactory $questionCollectionFactory
-    )
-    {
+    ) {
         $this->filter = $filter;
         $this->questionManagement = $questionManagement;
         $this->questionCollectionFactory = $questionCollectionFactory;
@@ -53,6 +54,7 @@ class MassDisable extends Action implements HttpPostActionInterface
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
         return $resultRedirect->setPath('*/*/');
     }
 }

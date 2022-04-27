@@ -10,6 +10,13 @@ interface QuestionInterface
     const POSITION = 'position';
     const UPDATED_AT = 'updated_at';
 
+    const STATUS_VALUES = [
+        0 => false,
+        1 => true,
+    ];
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 0;
+
     public function getQuestion(): string;
 
     public function setQuestion(string $question);
@@ -20,7 +27,7 @@ interface QuestionInterface
 
     public function getStatus(): bool;
 
-    public function setStatus(bool $status);
+    public function setStatus(int $status);
 
     public function getPosition(): int;
 

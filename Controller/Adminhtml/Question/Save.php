@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -20,12 +21,11 @@ class Save extends Action implements HttpPostActionInterface
     private $questionRepository;
 
     public function __construct(
-        Context     $context,
+        Context $context,
         PageFactory $pageFactory,
         QuestionFactory $questionFactory,
         QuestionRepositoryInterface $questionRepository
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->pageFactory = $pageFactory;
         $this->questionFactory = $questionFactory;
@@ -34,7 +34,8 @@ class Save extends Action implements HttpPostActionInterface
 
     public function execute(): Redirect
     {
-        $params = $this->getRequest()->getPostValue();
+        $params = $this->getRequest()
+            ->getPostValue();
 
         $back = $params['back'];
         /** @var Redirect $resultRedirect */

@@ -72,7 +72,9 @@
                 <settings>
                     <callback>
                         <target>editSelected</target>
-                        <provider>magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor</provider>
+                        <provider>
+                            magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor
+                        </provider>
                     </callback>
                     <type>edit</type>
                     <label translate="true">Edit</label>
@@ -105,11 +107,15 @@
                 </param>
                 <param name="indexField" xsi:type="string">id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">
+                    magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns.ids
+                </param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor</item>
+                    <item name="provider" xsi:type="string">
+                        magebit_faq_question_listing.magebit_faq_question_listing.magebit_faq_question_columns_editor
+                    </item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
@@ -126,6 +132,7 @@
         <column name="id">
             <settings>
                 <label translate="true">ID</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="question">

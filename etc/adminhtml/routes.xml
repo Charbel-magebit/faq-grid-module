@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
         <route id="faq" frontName="faq">
-            <module name="Magebit_Faq" />
+            <module name="Magebit_Faq"/>
         </route>
     </router>
 </config>

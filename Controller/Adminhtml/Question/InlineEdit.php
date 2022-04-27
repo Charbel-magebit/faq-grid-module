@@ -1,32 +1,31 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Exception;
 use Magebit\Faq\Api\Data\QuestionInterface;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
+use Magebit\Faq\Controller\Adminhtml\BaseController;
 use Magebit\Faq\Model\Question;
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 
-class InlineEdit extends Action implements HttpPostActionInterface
+class InlineEdit extends BaseController implements HttpPostActionInterface
 {
 
     private $resultJsonFactory;
-    private $questionRepository;
 
     public function __construct(
-        Context                     $context,
-        JsonFactory                 $resultJsonFactory,
+        Context $context,
+        JsonFactory $resultJsonFactory,
         QuestionRepositoryInterface $questionRepository
-    )
-    {
-        parent::__construct($context);
+    ) {
+        parent::__construct($context, $questionRepository);
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->questionRepository = $questionRepository;
     }
 
     public function execute(): Json
@@ -35,9 +34,11 @@ class InlineEdit extends Action implements HttpPostActionInterface
         $error = false;
         $messages = [];
 
-        $postItems = $this->getRequest()->getParam('items', []);
+        $postItems = $this->getRequest()
+            ->getParam('items', []);
 
-        if (!($this->getRequest()->getParam('isAjax') && count($postItems))) {
+        if (!($this->getRequest()
+                ->getParam('isAjax') && count($postItems))) {
             return $resultJson->setData(
                 [
                     'messages' => [__('Please correct the data sent.')],
@@ -74,6 +75,7 @@ class InlineEdit extends Action implements HttpPostActionInterface
         $questionData[QuestionInterface::ANSWER] = $postData['answer'] ?? null;
         $questionData[QuestionInterface::STATUS] = (bool)$postData['status'] ?? false;
         $questionData[QuestionInterface::POSITION] = (int)$postData['position'] ?? null;
+
         return $questionData;
     }
 
@@ -87,11 +89,11 @@ class InlineEdit extends Action implements HttpPostActionInterface
 
     public function setQuestionData(
         Question $question,
-        array    $extendedQuestionData,
-        array    $questionData
-    ): self
-    {
+        array $extendedQuestionData,
+        array $questionData
+    ): self {
         $question->setData(array_merge($question->getData(), $extendedQuestionData, $questionData));
+
         return $this;
     }
 }

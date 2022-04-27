@@ -47,6 +47,7 @@ class DefaultQuestions implements DataPatchInterface
             ]
         ];
 
+        // usually should not use insertMultiple but here as proof of concept
         $connection->insertMultiple(Question::MAIN_TABLE, $data);
 
         return $this;

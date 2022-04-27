@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
+use Magebit\Faq\Api\Data\QuestionInterface;
+use Magebit\Faq\Api\QuestionManagementInterface;
 use Magebit\Faq\Model\Question;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -16,7 +20,6 @@ use Magebit\Faq\Api\QuestionRepositoryInterface;
 
 class MassEnable extends Action implements HttpPostActionInterface
 {
-
     /**
      * @var Filter $filter
      */
@@ -25,17 +28,19 @@ class MassEnable extends Action implements HttpPostActionInterface
     protected $questionCollectionFactory;
 
     protected $questionRepository;
+    protected $questionManagement;
 
     public function __construct(
         Context $context,
         Filter $filter,
         QuestionCollectionFactory $questionCollectionFactory,
-        QuestionRepositoryInterface $questionRepository
-    )
-    {
+        QuestionRepositoryInterface $questionRepository,
+        QuestionManagementInterface $questionManagement
+    ) {
         $this->filter = $filter;
         $this->questionCollectionFactory = $questionCollectionFactory;
         $this->questionRepository = $questionRepository;
+        $this->questionManagement = $questionManagement;
         parent::__construct($context);
     }
 
@@ -48,8 +53,7 @@ class MassEnable extends Action implements HttpPostActionInterface
 
         /** @var Question $question */
         foreach ($questionCollection as $question) {
-            $question->setStatus(true);
-            $this->questionRepository->save($question);
+            $this->questionManagement->enableQuestion($question);
         }
 
         $this->messageManager->addSuccessMessage(
@@ -58,6 +62,7 @@ class MassEnable extends Action implements HttpPostActionInterface
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
         return $resultRedirect->setPath('*/*/');
     }
 }

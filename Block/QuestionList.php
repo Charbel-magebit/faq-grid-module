@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Magebit\Faq\Block;
 
@@ -15,43 +17,37 @@ use Magebit\Faq\Api\QuestionRepositoryInterface;
  */
 class QuestionList extends Template
 {
-    /**
-     * @var QuestionRepositoryInterface $questionRepository
-     */
+    /** @var QuestionRepositoryInterface $questionRepository */
     private $questionRepository;
 
-    /**
-     * @var SearchCriteriaBuilder $searchCriteriaBuilder
-     */
+    /** @var SearchCriteriaBuilder $searchCriteriaBuilder */
     private $searchCriteriaBuilder;
 
-    /**
-     * @var SortOrderBuilder $sortOrderBuilder
-     */
+    /** @var SortOrderBuilder $sortOrderBuilder */
     private $sortOrderBuilder;
 
-    /**
-     */
     public function __construct(
-        Context                     $context,
+        Context $context,
         QuestionRepositoryInterface $questionRepository,
-        SearchCriteriaBuilder       $searchCriteriaBuilder,
-        SortOrderBuilder            $sortOrderBuilder,
-        array                       $data = []
-    )
-    {
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        SortOrderBuilder $sortOrderBuilder,
+        array $data = []
+    ) {
         parent::__construct($context, $data);
         $this->questionRepository = $questionRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->sortOrderBuilder = $sortOrderBuilder;
     }
 
-    /**
-     */
     public function getQuestions(): array
     {
-        $sortOrder = $this->sortOrderBuilder->setField(QuestionInterface::POSITION)->setDirection('DESC')->create();
-        $searchCriteria = $this->searchCriteriaBuilder->setSortOrders([$sortOrder])->create();
+        $sortOrder = $this->sortOrderBuilder->setField(QuestionInterface::POSITION)
+            ->setDirection('DESC')
+            ->create();
+
+        $searchCriteria = $this->searchCriteriaBuilder->addFilter(QuestionInterface::STATUS, 1)
+            ->setSortOrders([$sortOrder])
+            ->create();
         $searchResult = $this->questionRepository->getList($searchCriteria);
 
         $frontendQuestions = [];

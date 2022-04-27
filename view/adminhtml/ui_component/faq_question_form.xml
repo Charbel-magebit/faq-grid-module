@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">faq_question_form.faq_question_form_data_source</item>
@@ -14,7 +15,7 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Magebit\Faq\Block\Adminhtml\Question\Edit\SaveButton" />
+            <button name="save" class="Magebit\Faq\Block\Adminhtml\Question\Edit\SaveButton"/>
             <button name="back">
                 <url path="*/*/"/>
                 <class>back</class>
@@ -22,8 +23,8 @@
             </button>
         </buttons>
         <namespace>faq_question_form</namespace>
-<!--        <ajaxSave>true</ajaxSave>-->
-<!--        <ajaxSaveType>simple</ajaxSaveType>-->
+        <!--        <ajaxSave>true</ajaxSave>-->
+        <!--        <ajaxSaveType>simple</ajaxSaveType>-->
         <dataScope>data</dataScope>
         <deps>
             <dep>faq_question_form.faq_question_form_data_source</dep>
@@ -37,7 +38,7 @@
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="submit_url" xsi:type="url" path="*/*/save" />
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
                 </item>
             </argument>
         </argument>
@@ -64,7 +65,8 @@
                 <label translate="true">Question Id</label>
             </settings>
         </field>
-        <field name="status" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+        <field name="status" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice"
+               formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="default" xsi:type="number">0</item>

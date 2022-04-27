@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model;
 
@@ -22,6 +24,7 @@ class Question extends AbstractModel implements QuestionInterface
     public function setQuestion(string $question): self
     {
         $this->setData(self::QUESTION, $question);
+
         return $this;
     }
 
@@ -33,6 +36,7 @@ class Question extends AbstractModel implements QuestionInterface
     public function setAnswer(string $answer): self
     {
         $this->setData(self::ANSWER, $answer);
+
         return $this;
     }
 
@@ -41,9 +45,10 @@ class Question extends AbstractModel implements QuestionInterface
         return $this->_getData(self::STATUS);
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(int $status): self
     {
-        $this->setData(self::STATUS, $status);
+        $this->setData(self::STATUS, QuestionInterface::STATUS_VALUES[$status]);
+
         return $this;
     }
 
@@ -55,6 +60,7 @@ class Question extends AbstractModel implements QuestionInterface
     public function setPosition(int $position): self
     {
         $this->setData(self::POSITION, $position);
+
         return $this;
     }
 

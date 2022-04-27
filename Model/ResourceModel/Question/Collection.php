@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\Faq\Model\ResourceModel\Question;
 
 use Magebit\Faq\Model\Question;
