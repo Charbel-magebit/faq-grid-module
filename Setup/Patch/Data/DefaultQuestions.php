@@ -4,24 +4,17 @@ namespace Magebit\Faq\Setup\Patch\Data;
 
 use Magebit\Faq\Model\ResourceModel\Question;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchInterface;
 
 class DefaultQuestions implements DataPatchInterface
 {
-
-    /** @var ModuleDataSetupInterface $moduleDataSetup */
-    private $moduleDataSetup;
     /** @var ResourceConnection $resource */
     private $resource;
 
     public function __construct(
-        ModuleDataSetupInterface $moduleDataSetup,
-        ResourceConnection       $resource
+        ResourceConnection $resource
     )
     {
-        $this->moduleDataSetup =  $moduleDataSetup;
         $this->resource = $resource;
     }
 

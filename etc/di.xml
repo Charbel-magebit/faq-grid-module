@@ -9,6 +9,10 @@
             for="Magento\Cms\Api\Data\PageSearchResultsInterface"
             type="Magento\Framework\Api\SearchResults"
     />
+    <preference
+            for="Magebit\Faq\Api\QuestionManagementInterface"
+            type="Magebit\Faq\Model\QuestionManagement"
+    />
     <virtualType name="Magebit\Faq\Model\ResourceModel\Question\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>

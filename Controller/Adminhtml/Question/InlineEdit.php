@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Exception;
+use Magebit\Faq\Api\Data\QuestionInterface;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Model\Question;
 use Magento\Backend\App\Action;
@@ -18,8 +19,8 @@ class InlineEdit extends Action implements HttpPostActionInterface
     private $questionRepository;
 
     public function __construct(
-        Context $context,
-        JsonFactory $resultJsonFactory,
+        Context                     $context,
+        JsonFactory                 $resultJsonFactory,
         QuestionRepositoryInterface $questionRepository
     )
     {
@@ -32,7 +33,7 @@ class InlineEdit extends Action implements HttpPostActionInterface
     {
         $resultJson = $this->resultJsonFactory->create();
         $error = false;
-        $messages = '';
+        $messages = [];
 
         $postItems = $this->getRequest()->getParam('items', []);
 
@@ -55,7 +56,7 @@ class InlineEdit extends Action implements HttpPostActionInterface
                 $this->questionRepository->save($question);
             }
         } catch (Exception $e) {
-            $messages = __('Something went wrong while saving the page.');
+            $messages[] = __('Something went wrong while saving the page.');
             $error = true;
         }
 
@@ -69,18 +70,18 @@ class InlineEdit extends Action implements HttpPostActionInterface
 
     protected function filterPost($postData = []): array
     {
-        $questionData['question'] = $postData['question'] ?? null;
-        $questionData['answer'] = $postData['answer'] ?? null;
-        $questionData['status'] = (bool)$postData['status'] ?? false;
-        $questionData['position'] = (int)$postData['position'] ?? null;
+        $questionData[QuestionInterface::QUESTION] = $postData['question'] ?? null;
+        $questionData[QuestionInterface::ANSWER] = $postData['answer'] ?? null;
+        $questionData[QuestionInterface::STATUS] = (bool)$postData['status'] ?? false;
+        $questionData[QuestionInterface::POSITION] = (int)$postData['position'] ?? null;
         return $questionData;
     }
 
-    protected function validatePost(array $questionData, string &$error, string &$messages)
+    protected function validatePost(array $questionData, bool &$error, array &$messages)
     {
-        if ($questionData['question'] === null || $questionData['answer'] === null) {
+        if ($questionData[QuestionInterface::QUESTION] === null || $questionData[QuestionInterface::ANSWER] === null) {
             $error = true;
-            $messages = __('Question and Answer fields should not be empty');
+            $messages[] = __('Question and Answer fields should not be empty');
         }
     }
 

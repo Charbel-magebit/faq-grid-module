@@ -7,40 +7,30 @@ use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\View\Result\PageFactory;
-
-use Magebit\Faq\Model\QuestionFactory;
-use Magebit\Faq\Model\ResourceModel\Question as QuestionResourceModel;
+use Magebit\Faq\Api\QuestionRepositoryInterface;
 
 class Delete extends Action implements HttpGetActionInterface
 {
-    /** @var PageFactory $pageFactory */
-    protected $pageFactory;
+    private $questionRepository;
 
-    private $questionResourceModel;
-    private $questionFactory;
-
+    /**
+     */
     public function __construct(
-        Context     $context,
-        PageFactory $pageFactory,
-        QuestionResourceModel $questionResourceModel,
-        QuestionFactory $questionFactory
+        Context                     $context,
+        QuestionRepositoryInterface $questionRepository
     )
     {
         parent::__construct($context);
-        $this->pageFactory = $pageFactory;
-        $this->questionFactory = $questionFactory;
-        $this->questionResourceModel = $questionResourceModel;
+        $this->questionRepository = $questionRepository;
     }
 
     public function execute(): Redirect
     {
         try {
-            $id = $this->getRequest()->getParam('id');
-            $faq = $this->questionFactory->create();
-            $this->questionResourceModel->load($faq, $id);
+            $id = (int)$this->getRequest()->getParam('id');
+            $faq = $this->questionRepository->getById($id);
             if ($faq->getId()) {
-                $this->questionResourceModel->delete($faq);
+                $this->questionRepository->delete($faq);
                 $this->messageManager->addSuccessMessage(__('The question has been successfully deleted'));
             } else {
                 $this->messageManager->addErrorMessage(__('The question does not exist'));

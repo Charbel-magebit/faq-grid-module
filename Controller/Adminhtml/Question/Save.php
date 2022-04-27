@@ -7,25 +7,21 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\PageFactory;
 
 use Magebit\Faq\Model\QuestionFactory;
-use Magebit\Faq\Model\ResourceModel\Question as QuestionResourceModel;
 
 class Save extends Action implements HttpPostActionInterface
 {
     /** @var PageFactory $pageFactory */
     protected $pageFactory;
 
-    private $questionResourceModel;
     private $questionFactory;
     private $questionRepository;
 
     public function __construct(
         Context     $context,
         PageFactory $pageFactory,
-        QuestionResourceModel $questionResourceModel,
         QuestionFactory $questionFactory,
         QuestionRepositoryInterface $questionRepository
     )
@@ -33,7 +29,6 @@ class Save extends Action implements HttpPostActionInterface
         parent::__construct($context);
         $this->pageFactory = $pageFactory;
         $this->questionFactory = $questionFactory;
-        $this->questionResourceModel = $questionResourceModel;
         $this->questionRepository = $questionRepository;
     }
 

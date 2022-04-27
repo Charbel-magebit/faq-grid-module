@@ -56,6 +56,7 @@ class MassEnable extends Action implements HttpPostActionInterface
             __('A total of %1 question(s) have been enabled.', $questionCollection->getSize())
         );
 
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');
     }

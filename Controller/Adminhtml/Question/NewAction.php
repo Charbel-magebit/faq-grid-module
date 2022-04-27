@@ -3,26 +3,17 @@
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\ForwardFactory;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Backend\Model\View\Result\Forward;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\ResultFactory;
 
 class NewAction extends Action implements HttpGetActionInterface
 {
-    protected $resultForwardFactory;
-
-    public function __construct(
-        Context $context,
-        ForwardFactory $resultForwardFactory
-    ) {
-        $this->resultForwardFactory = $resultForwardFactory;
-        parent::__construct($context);
-    }
-
     public function execute(): Forward
     {
-        $resultForward = $this->resultForwardFactory->create();
+        /** @var Forward $resultForward */
+        $resultForward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);
+
         return $resultForward->forward('edit');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Magebit\Faq\Model;
 
+use Exception;
 use Magebit\Faq\Api\Data\QuestionInterface;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -75,13 +76,22 @@ class QuestionRepository implements QuestionRepositoryInterface
         return $searchResult;
     }
 
-    public function delete(QuestionInterface $question)
+    /**
+     * @throws Exception
+     */
+    public function delete(QuestionInterface $question): void
     {
-        return 'ok';
+        $questionResourceModel = $this->questionResourceModelFactory->create();
+        $questionResourceModel->delete($question);
     }
 
-    public function deleteById(int $id)
+    /**
+     * @throws NoSuchEntityException
+     * @throws Exception
+     */
+    public function deleteById(int $id): void
     {
-        return 'ok';
+        $question = $this->getById($id);
+        $this->delete($question);
     }
 }

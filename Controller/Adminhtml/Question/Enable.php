@@ -8,32 +8,27 @@ use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\View\Result\PageFactory;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 
 class Enable extends Action implements HttpGetActionInterface
 {
-    /** @var PageFactory $pageFactory */
-    protected $pageFactory;
     private $questionRepository;
 
 
     public function __construct(
         Context     $context,
-        PageFactory $pageFactory,
         QuestionRepositoryInterface $questionRepository
     )
     {
         parent::__construct($context);
-        $this->pageFactory = $pageFactory;
         $this->questionRepository = $questionRepository;
     }
 
     public function execute(): Redirect
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = (int)$this->getRequest()->getParam('id');
         /** @var Question $question */
-        $question = $this->questionRepository->getById((int)$id);
+        $question = $this->questionRepository->getById($id);
         $question->setStatus(true);
         $this->questionRepository->save($question);
 

@@ -10,7 +10,7 @@ class Question extends AbstractModel implements QuestionInterface
 
     protected function _construct()
     {
-        $this->_init(\Magebit\Faq\Model\ResourceModel\Question::class);
+        $this->_init(ResourceModel\Question::class);
     }
 
 

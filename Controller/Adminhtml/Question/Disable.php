@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -8,24 +8,19 @@ use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\View\Result\PageFactory;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 
 class Disable extends Action implements HttpGetActionInterface
 {
-    /** @var PageFactory $pageFactory */
-    protected $pageFactory;
     private $questionRepository;
 
 
     public function __construct(
         Context     $context,
-        PageFactory $pageFactory,
         QuestionRepositoryInterface $questionRepository
     )
     {
         parent::__construct($context);
-        $this->pageFactory = $pageFactory;
         $this->questionRepository = $questionRepository;
     }
 

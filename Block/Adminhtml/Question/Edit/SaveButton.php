@@ -1,18 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Magebit\Faq\Block\Adminhtml\Question\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Magento\Ui\Component\Control\Container;
 
-
 class SaveButton implements ButtonProviderInterface
 {
-
     public function getButtonData(): array
     {
-
-
         return [
             'label' => __('Save Question'),
             'class' => 'save primary',
